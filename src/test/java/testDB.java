@@ -1,7 +1,10 @@
+import com.help.dao.AfhinfoDao;
 import com.help.dao.UserDao;
+import com.help.pojo.Afhinfo;
 import com.help.pojo.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class testDB {
 
@@ -22,19 +25,45 @@ public class testDB {
         }
         return true;
     }
+    Boolean addAfhinfo(){
+        Afhinfo afhinfo = new Afhinfo();
+        afhinfo.setUserId(333);
+        afhinfo.setUsername("root");
+        afhinfo.setReqInfo("哈哈哈哈哈");
+        afhinfo.setTime("2017-10-18 17:38:56");
+        afhinfo.setLocation("图书馆");
+        return true;
+    }
 
     public static void main(String[] args){
-        UserDao userDao = new UserDao();
-        User user = new User();
-        user.setUserId(1000);
-        user.setMobilephone("15212928608");
-        user.setUsername("alice_root");
-        user.setUsermail("lacunak@sina.com");
+//        UserDao userDao = new UserDao();
+//        User user = new User();
+//        user.setUserId(1000);
+//        user.setMobilephone("15212928608");
+//        user.setUsername("alice_root");
+//        user.setUsermail("lacunak@sina.com");
+//        try {
+//         //   int num = userDao.changeMobilephone(user);
+//         //   int num = userDao.changeUsername(user);
+//            int num = userDao.changeUsermail(user);
+//            System.out.println("更新成功！"+"受影响的行数为："+num);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+        Afhinfo afhinfo = new Afhinfo();
+        afhinfo.setUserId(333);
+        afhinfo.setUsername("root");
+        afhinfo.setReqInfo("哈哈哈哈哈");
+        afhinfo.setTime("2017-10-18 17:38:56");
+        afhinfo.setLocation("图书馆");
+        AfhinfoDao afhinfoDao = new AfhinfoDao();
         try {
-         //   int num = userDao.changeMobilephone(user);
-         //   int num = userDao.changeUsername(user);
-            int num = userDao.changeUsermail(user);
-            System.out.println("更新成功！"+"受影响的行数为："+num);
+            //afhinfoDao.addAfhinfo(afhinfo);
+            List<Afhinfo> lrs =  afhinfoDao.SearchAfhinfo(afhinfo.getUserId());
+            for (int i = 0;i<lrs.size();i++){
+                System.out.println(lrs.get(i).getReqInfo());
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

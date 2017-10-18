@@ -1,16 +1,34 @@
 package com.help.pojo;
 
 public class Afhinfo {
-    private String userId;
+    private int reqId;
+    private String username;
+    private int userId;
     private String reqInfo;
     private String location;
     private String time;
 
-    public String getUserId() {
+    public int getReqId() {
+        return reqId;
+    }
+
+    public void setReqId(int reqId) {
+        this.reqId = reqId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

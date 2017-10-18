@@ -46,23 +46,17 @@ public class UserDao extends BaseDao{
         return 2;
     }
     public void AddUser(User user) throws SQLException {
-
-        String username = user.getUsername();//定义用户名
-        String mobilephone = user.getMobilephone();//定义手机
-        String usermail = user.getUsermail();//定义邮箱
-        String usersex = user.getUsersex();//定义性别
-        String password = user.getPassword();//定义密码
         String sql = "INSERT INTO `help`.`userinfo` (  `username`, `mobilephone`, `usermail`, `usersex`, `password`)  VALUES  (   ?  ,   ?   ,   ?   ,   ?   ,   ?   ) ";
         try {
             connection = getConnection();
             //建立传输SQL语句的statement
             statement = connection.prepareStatement(sql);
 
-            statement.setString(1, username);
-            statement.setString(2, mobilephone);
-            statement.setString(3, usermail);
-            statement.setString(4, usersex);
-            statement.setString(5, password);
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getMobilephone());
+            statement.setString(3, user.getUsermail());
+            statement.setString(4, user.getUsersex());
+            statement.setString(5, user.getPassword());
 
             //执行SQL，返回影响记录的行数
             int num = statement.executeUpdate();
