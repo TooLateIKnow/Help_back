@@ -28,4 +28,13 @@
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeInfoServlet</servlet-name>
+        <servlet-class>com.help.controller.ChangeInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeInfoServlet</servlet-name>
+        <url-pattern>/ChangeInfoServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

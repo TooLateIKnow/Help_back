@@ -18,17 +18,25 @@ import java.sql.SQLException;
 public class LoginServlet extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("客户端连接RegisterServlet成功");
+        System.out.println("客户端连接LoginServlet成功");
         String send =null;
         String stringUser = request.getParameter("user");
         JSONObject jsonUser = JSONObject.fromObject(stringUser);
         User user = (User)JSONObject.toBean(jsonUser,User.class);
+//        System.out.println("客户端传过来的"+user.getMobilephone());
         UserDao searchPassword = new UserDao();
         String phoneNum = user.getMobilephone();
         try {
             User searchResult = searchPassword.SearchPassword(phoneNum);
-            int id = searchResult.getUserId();
-            send = String.valueOf(id);
+
+            if(searchResult.getUserId() == 0000){
+                send = "0000";
+            }
+            else{
+                JSONObject sendUser = JSONObject.fromObject(searchResult);
+                send = sendUser.toString();
+                //System.out.println("最终结果 send"+send);
+            }
             PrintWriter out=response.getWriter();
             out.write(send);
             out.flush();

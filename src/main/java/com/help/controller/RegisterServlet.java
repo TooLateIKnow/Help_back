@@ -29,7 +29,7 @@ public class RegisterServlet extends HttpServlet {
             e.printStackTrace();
         }
         PrintWriter out=resp.getWriter();
-        String send = null;
+        String send = "初值";
         if (whetherExist == 1){
             send = "用户已存在，注册失败";
         }

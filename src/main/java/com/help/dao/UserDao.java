@@ -77,15 +77,19 @@ public class UserDao extends BaseDao{
     }
     public  User SearchPassword(String phoneNum) throws SQLException{
         User user = new User();
-        String sql = "SELECT   `password`,`userId` FROM `help`.`userinfo` WHERE `mobilephone` like ? ";
+        String sql = "SELECT   * FROM `help`.`userinfo` WHERE `mobilephone` like ? ";
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
             statement.setString(1, phoneNum);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
+                user.setUsername(resultSet.getString("username"));
                 user.setUserId(resultSet.getInt("userId"));
                 user.setPassword(resultSet.getString("password"));
+                user.setMobilephone(resultSet.getString("mobilephone"));
+                user.setUsermail(resultSet.getString("usermail"));
+                user.setUsersex(resultSet.getString("usersex"));
             }
             else {
                 user.setUserId(0000);
@@ -96,6 +100,57 @@ public class UserDao extends BaseDao{
         statement.close();
         connection.close();
         return user;
+    }
+    public int changeMobilephone(User user) throws SQLException{
+        int num = 0;
+        String id = String.valueOf(user.getUserId());
+        String sql = "UPDATE `help`.`userinfo` SET `mobilephone` = ? WHERE `userId` like ? ";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,user.getMobilephone());
+            statement.setString(2, id);
+            num = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        statement.close();
+        connection.close();
+        return num;
+    }
+    public int changeUsermail(User user) throws SQLException{
+        int num = 0;
+        String id = String.valueOf(user.getUserId());
+        String sql = "UPDATE `help`.`userinfo` SET `usermail` = ? WHERE `userId` like ? ";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,user.getUsermail());
+            statement.setString(2, id);
+            num = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        statement.close();
+        connection.close();
+        return num;
+    }
+    public int changeUsername(User user) throws SQLException {
+        int num = 0;
+        String id = String.valueOf(user.getUserId());
+        String sql = "UPDATE `help`.`userinfo` SET `username` = ? WHERE `userId` like ? ";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,user.getUsername());
+            statement.setString(2, id);
+            num = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        statement.close();
+        connection.close();
+        return num;
     }
 }
 
