@@ -2,11 +2,22 @@ package com.help.pojo;
 
 public class Afhinfo {
     private int reqId;
+    private String picnum;
     private String username;
     private int userId;
     private String reqInfo;
     private String location;
     private String time;
+
+    public String getPicnum() {
+        return picnum;
+    }
+
+    public void setPicnum(String picnum) {
+        this.picnum = picnum;
+    }
+
+
 
     public int getReqId() {
         return reqId;

@@ -37,4 +37,13 @@
         <servlet-name>ChangeInfoServlet</servlet-name>
         <url-pattern>/ChangeInfoServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RequestHallServlet</servlet-name>
+        <servlet-class>com.help.controller.RequestHallServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RequestHallServlet</servlet-name>
+        <url-pattern>/RequestHallServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
