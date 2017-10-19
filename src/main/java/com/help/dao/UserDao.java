@@ -9,12 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao extends BaseDao{
+public class UserDao extends BaseDao {
     Connection connection = null;
     PreparedStatement statement = null;
     List<User> lrs = null;
 
-    public  int Search(User user) throws SQLException {
+    public int Search(User user) throws SQLException {
         String username = user.getUsername();//定义用户名
         String mobilephone = user.getMobilephone();//定义手机
         String usermail = user.getUsermail();//定义邮箱
@@ -28,13 +28,12 @@ public class UserDao extends BaseDao{
             statement.setString(1, mobilephone);
             ResultSet resultSet = statement.executeQuery();
 
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 System.out.println("已注册");
                 statement.close();
                 connection.close();
                 return 1;
-            }
-            else{
+            } else {
                 System.out.println("未注册");
                 statement.close();
                 connection.close();
@@ -45,6 +44,7 @@ public class UserDao extends BaseDao{
         }
         return 2;
     }
+
     public void AddUser(User user) throws SQLException {
         String sql = "INSERT INTO `help`.`userinfo` (  `username`, `mobilephone`, `usermail`, `usersex`, `password`)  VALUES  (   ?  ,   ?   ,   ?   ,   ?   ,   ?   ) ";
         try {
@@ -60,16 +60,17 @@ public class UserDao extends BaseDao{
 
             //执行SQL，返回影响记录的行数
             int num = statement.executeUpdate();
-            System.out.println("插入成功！"+"受影响的行数为："+num);
+            System.out.println("插入成功！" + "受影响的行数为：" + num);
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.println("err="+e);
+            System.out.println("err=" + e);
         }
         statement.close();
         connection.close();
     }
-    public  User SearchPassword(String phoneNum) throws SQLException{
+
+    public User SearchPassword(String phoneNum) throws SQLException {
         User user = new User();
         String sql = "SELECT   * FROM `help`.`userinfo` WHERE `mobilephone` like ? ";
         try {
@@ -77,16 +78,15 @@ public class UserDao extends BaseDao{
             statement = connection.prepareStatement(sql);
             statement.setString(1, phoneNum);
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
-                user.setUsername(resultSet.getString("username")==null? "" : resultSet.getString("username"));
+            if (resultSet.next()) {
+                user.setUsername(resultSet.getString("username") == null ? "" : resultSet.getString("username"));
                 user.setUserId(resultSet.getInt("userId"));
-                user.setPassword(resultSet.getString("password")==null? "" : resultSet.getString("password"));
-                user.setMobilephone(resultSet.getString("mobilephone")==null? "" : resultSet.getString("mobilephone"));
-                user.setUsermail(resultSet.getString("usermail")==null? "" : resultSet.getString("usermail"));
-                user.setUsersex(resultSet.getString("usersex")==null? "" : resultSet.getString("usersex"));
-                user.setPicnum(resultSet.getObject("picnum")==null? "" : resultSet.getString("picnum"));
-            }
-            else {
+                user.setPassword(resultSet.getString("password") == null ? "" : resultSet.getString("password"));
+                user.setMobilephone(resultSet.getString("mobilephone") == null ? "" : resultSet.getString("mobilephone"));
+                user.setUsermail(resultSet.getString("usermail") == null ? "" : resultSet.getString("usermail"));
+                user.setUsersex(resultSet.getString("usersex") == null ? "" : resultSet.getString("usersex"));
+                user.setPicnum(resultSet.getObject("picnum") == null ? "" : resultSet.getString("picnum"));
+            } else {
                 user.setUserId(0000);
             }
         } catch (SQLException e) {
@@ -96,7 +96,8 @@ public class UserDao extends BaseDao{
         connection.close();
         return user;
     }
-    public  User SearchUser(int userID) throws SQLException{
+
+    public User SearchUser(int userID) throws SQLException {
         User user = new User();
         String sql = "SELECT   * FROM `help`.`userinfo` WHERE `userId` like ? ";
         try {
@@ -104,13 +105,13 @@ public class UserDao extends BaseDao{
             statement = connection.prepareStatement(sql);
             statement.setString(1, String.valueOf(userID));
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet.next()){
-                user.setUsername(resultSet.getString("username")==null? "" : resultSet.getString("username"));
-                user.setPicnum(resultSet.getObject("picnum")==null? "" : resultSet.getString("picnum"));
+            if (resultSet.next()) {
+                user.setUsername(resultSet.getString("username") == null ? "" : resultSet.getString("username"));
+                user.setPicnum(resultSet.getObject("picnum") == null ? "" : resultSet.getString("picnum"));
+
             }
-            else {
-                user.setUserId(0000);
-            }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -118,14 +119,15 @@ public class UserDao extends BaseDao{
         connection.close();
         return user;
     }
-    public int changeMobilephone(User user) throws SQLException{
+
+    public int changeMobilephone(User user) throws SQLException {
         int num = 0;
         String id = String.valueOf(user.getUserId());
         String sql = "UPDATE `help`.`userinfo` SET `mobilephone` = ? WHERE `userId` like ? ";
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1,user.getMobilephone());
+            statement.setString(1, user.getMobilephone());
             statement.setString(2, id);
             num = statement.executeUpdate();
         } catch (SQLException e) {
@@ -135,14 +137,15 @@ public class UserDao extends BaseDao{
         connection.close();
         return num;
     }
-    public int changeUsermail(User user) throws SQLException{
+
+    public int changeUsermail(User user) throws SQLException {
         int num = 0;
         String id = String.valueOf(user.getUserId());
         String sql = "UPDATE `help`.`userinfo` SET `usermail` = ? WHERE `userId` like ? ";
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1,user.getUsermail());
+            statement.setString(1, user.getUsermail());
             statement.setString(2, id);
             num = statement.executeUpdate();
         } catch (SQLException e) {
@@ -152,6 +155,7 @@ public class UserDao extends BaseDao{
         connection.close();
         return num;
     }
+
     public int changeUsername(User user) throws SQLException {
         int num = 0;
         String id = String.valueOf(user.getUserId());
@@ -159,7 +163,7 @@ public class UserDao extends BaseDao{
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1,user.getUsername());
+            statement.setString(1, user.getUsername());
             statement.setString(2, id);
             num = statement.executeUpdate();
         } catch (SQLException e) {
@@ -169,6 +173,7 @@ public class UserDao extends BaseDao{
         connection.close();
         return num;
     }
+
     public int changePicnum(User user) throws SQLException {
         int num = 0;
         String id = String.valueOf(user.getUserId());
@@ -176,7 +181,7 @@ public class UserDao extends BaseDao{
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
-            statement.setString(1,user.getPicnum());
+            statement.setString(1, user.getPicnum());
             statement.setString(2, id);
             num = statement.executeUpdate();
         } catch (SQLException e) {

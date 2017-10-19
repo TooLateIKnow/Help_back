@@ -6,11 +6,11 @@ public class TestServerSocket {
 
     public static void main(String[] args) {
 
-        User user = new User("1","2","3","4","5");
-        JSONObject root = JSONObject.fromObject(user);
-        System.out.println(root.toString());
-        new ServerListener().start();
-        System.out.println("�������ѿ���������");
+//        User user = new User("1","2","3","4","5");
+//        JSONObject root = JSONObject.fromObject(user);
+//        System.out.println(root.toString());
+//        new ServerListener().start();
+//        System.out.println("�������ѿ���������");
     }
 }
 

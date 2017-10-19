@@ -4,7 +4,9 @@ import com.help.dao.PhinfoDao;
 import com.help.dao.UserDao;
 import com.help.pojo.Afhinfo;
 import com.help.pojo.Phinfo;
+import com.help.pojo.ShowHistory;
 import com.help.pojo.User;
+import net.sf.json.JSONArray;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -42,7 +44,15 @@ public class testDB {
 
     public static void main(String[] args) throws SQLException {
         HelpinfoDao helpinfoDao = new HelpinfoDao();
-        helpinfoDao.SearchHistory(999);
+        JSONArray jsonArray = new JSONArray();
+
+        List<ShowHistory> lrs =  helpinfoDao.SearchHistory(1001);
+        for (int i = 0;i<lrs.size();i++){
+            jsonArray.add(lrs.get(i));
+            System.out.println("Run at int main "+jsonArray.get(i));
+            System.out.println("Run at int main "+lrs.get(i).getUnmAFH());
+        }
+
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 //        System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
 //        UserDao userDao = new UserDao();

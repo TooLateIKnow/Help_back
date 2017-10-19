@@ -23,8 +23,8 @@ public class RequestHallServlet extends HttpServlet {
             JSONArray jsonArray = new JSONArray();
             AfhinfoDao afhinfoDao = new AfhinfoDao();
 
-            List<Afhinfo> lrs =  afhinfoDao.Search();
-            for (int i = 0;i<lrs.size();i++){
+            List<Afhinfo> lrs = afhinfoDao.Search();
+            for (int i = 0; i < lrs.size(); i++) {
                 jsonArray.add(lrs.get(i));
             }
             String send = jsonArray.toString();
@@ -35,7 +35,7 @@ public class RequestHallServlet extends HttpServlet {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

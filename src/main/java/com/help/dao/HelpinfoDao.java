@@ -72,6 +72,7 @@ public class HelpinfoDao extends BaseDao {
     }
 
     public List<ShowHistory> SearchHistory(int userId) throws SQLException {
+        System.out.println("Run at SearchHistory");
         List<ShowHistory> showHistories = null;
         showHistories = new ArrayList<ShowHistory>();//不可少
         ResultSet resultSet = null;
@@ -85,7 +86,7 @@ public class HelpinfoDao extends BaseDao {
             //执行SQL，返回影响记录的行数
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
- //               System.out.println(resultSet.getObject("userAFHId"));
+                //               System.out.println(resultSet.getObject("userAFHId"));
                 ShowHistory history = new ShowHistory();
                 history.setHelpWhat(resultSet.getObject("helpWhat") == null ? "" : resultSet.getString("helpWhat"));
                 history.setLocation(resultSet.getObject("location") == null ? "" : resultSet.getString("location"));//要判空！！！
@@ -94,13 +95,15 @@ public class HelpinfoDao extends BaseDao {
                 history.setUserPHId(resultSet.getObject("userPHId") == null ? "" : resultSet.getString("userPHId"));//要判空！！！
 
                 UserDao userDao = new UserDao();
-                User user = userDao.SearchUser(Integer.parseInt(history.getUserAFHId()));
-                history.setUnmAFH(user.getUsername());
-                history.setPicnumAFH(user.getPicnum());
+                User user = new User();
 
+                userDao.SearchUser(Integer.parseInt(history.getUserAFHId()));
+
+                history.setUnmAFH(userDao.SearchUser(Integer.parseInt(history.getUserAFHId())).getUsername());
+                history.setPicnumAFH(userDao.SearchUser(Integer.parseInt(history.getUserAFHId())).getPicnum());
                 User user1 = userDao.SearchUser(Integer.parseInt(history.getUserPHId()));
                 history.setPicnumPH(user1.getPicnum());
-                history.setUnmAFH(user1.getUsername());
+                history.setUnmPH(user1.getUsername());
                 showHistories.add(history);
             }
         } catch (SQLException e) {
