@@ -1,18 +1,26 @@
 package com.help.pojo;
 
 public class Phinfo {
-    private String userId;
+    private int userId;
     private String prohelpInfo;
-    private String AFHuserId;
+    private int AFHuserId;
     private String time;
     private String location;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getAFHuserId() {
+        return AFHuserId;
+    }
+
+    public void setAFHuserId(int AFHuserId) {
+        this.AFHuserId = AFHuserId;
     }
 
     public String getProhelpInfo() {
@@ -21,14 +29,6 @@ public class Phinfo {
 
     public void setProhelpInfo(String prohelpInfo) {
         this.prohelpInfo = prohelpInfo;
-    }
-
-    public String getAFHuserId() {
-        return AFHuserId;
-    }
-
-    public void setAFHuserId(String AFHuserId) {
-        this.AFHuserId = AFHuserId;
     }
 
     public String getTime() {

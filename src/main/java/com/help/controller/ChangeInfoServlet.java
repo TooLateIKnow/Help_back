@@ -23,13 +23,7 @@ public class ChangeInfoServlet extends HttpServlet {
         ///首先，需要获取客户端的JSON字符串
         String stringUpdata = req.getParameter("user");
         JSONObject jsonUpdata = JSONObject.fromObject(stringUpdata);
-        System.out.println(jsonUpdata);
         User user = (User) JSONObject.toBean(jsonUpdata, User.class);
-
-        System.out.println(user.getUsername());//输出来看看而已
-        System.out.println(user.getUsermail());
-        System.out.println(user.getMobilephone());
-        System.out.println(user.getUserId());
 
         //如果修改了手机号码
         //TODO:updata手机号码

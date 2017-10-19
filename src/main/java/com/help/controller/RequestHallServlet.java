@@ -2,7 +2,9 @@ package com.help.controller;
 
 import com.help.dao.AfhinfoDao;
 import com.help.pojo.Afhinfo;
+import com.help.pojo.User;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,15 +22,17 @@ public class RequestHallServlet extends HttpServlet {
             System.out.println("客户端连接RequestHallServlet成功");
             JSONArray jsonArray = new JSONArray();
             AfhinfoDao afhinfoDao = new AfhinfoDao();
-            //afhinfoDao.addAfhinfo(afhinfo);
+
             List<Afhinfo> lrs =  afhinfoDao.Search();
             for (int i = 0;i<lrs.size();i++){
                 jsonArray.add(lrs.get(i));
-                System.out.println(jsonArray.get(i));
             }
             String send = jsonArray.toString();
             PrintWriter out = resp.getWriter();
             out.write(send);
+
+            String stringProvideHelp = req.getParameter("help");
+            System.out.println("测试 = "+stringProvideHelp);
 
         } catch (SQLException e) {
             e.printStackTrace();

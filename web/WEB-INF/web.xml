@@ -46,4 +46,14 @@
         <servlet-name>RequestHallServlet</servlet-name>
         <url-pattern>/RequestHallServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PublishServlet</servlet-name>
+        <servlet-class>com.help.controller.PublishServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PublishServlet</servlet-name>
+        <url-pattern>/PublishServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
