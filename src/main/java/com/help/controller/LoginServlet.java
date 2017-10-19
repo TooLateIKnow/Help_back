@@ -23,7 +23,6 @@ public class LoginServlet extends HttpServlet{
         String stringUser = request.getParameter("user");
         JSONObject jsonUser = JSONObject.fromObject(stringUser);
         User user = (User)JSONObject.toBean(jsonUser,User.class);
-//        System.out.println("客户端传过来的"+user.getMobilephone());
         UserDao searchPassword = new UserDao();
         String phoneNum = user.getMobilephone();
         try {

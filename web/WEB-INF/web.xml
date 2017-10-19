@@ -50,7 +50,7 @@
     <servlet>
     <servlet-name>PublishServlet</servlet-name>
     <servlet-class>com.help.controller.PublishServlet</servlet-class>
-</servlet>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PublishServlet</servlet-name>
         <url-pattern>/PublishServlet</url-pattern>
@@ -63,6 +63,15 @@
     <servlet-mapping>
         <servlet-name>HistoryServlet</servlet-name>
         <url-pattern>/HistoryServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ShowHistoryServlet</servlet-name>
+        <servlet-class>com.help.controller.ShowHistoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowHistoryServlet</servlet-name>
+        <url-pattern>/ShowHistoryServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

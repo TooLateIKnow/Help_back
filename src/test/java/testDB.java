@@ -1,4 +1,5 @@
 import com.help.dao.AfhinfoDao;
+import com.help.dao.HelpinfoDao;
 import com.help.dao.PhinfoDao;
 import com.help.dao.UserDao;
 import com.help.pojo.Afhinfo;
@@ -39,7 +40,9 @@ public class testDB {
         return true;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException {
+        HelpinfoDao helpinfoDao = new HelpinfoDao();
+        helpinfoDao.SearchHistory(999);
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 //        System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
 //        UserDao userDao = new UserDao();
@@ -73,8 +76,8 @@ public class testDB {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        PhinfoDao phinfoDao = new PhinfoDao();
-        Phinfo phinfo = new Phinfo();
+//        PhinfoDao phinfoDao = new PhinfoDao();
+//        Phinfo phinfo = new Phinfo();
 
 //        phinfoDao.addAfhinfo();
 

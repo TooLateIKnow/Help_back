@@ -36,6 +36,9 @@ public class ChangeInfoServlet extends HttpServlet {
             } else if (user.getUsername() != null) {//如果修改了用户名
                 //TODO:updata用户名
                 changeSuccess = userDao.changeUsername(user);
+            }else if (user.getPicnum() != null) {//如果修改了用户名
+                //TODO:updata用户名
+                changeSuccess = userDao.changePicnum(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();

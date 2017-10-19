@@ -7,9 +7,19 @@ public class User {
     private String usermail;//定义邮箱
     private String usersex;//定义性别
     private String password;//定义密码
+    private String picnum;
     public User(){
 
     }
+
+    public String getPicnum() {
+        return picnum;
+    }
+
+    public void setPicnum(String picnum) {
+        this.picnum = picnum;
+    }
+
     public User(int userId){
         this.userId = userId;
     }

@@ -20,13 +20,13 @@ public class PublishServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-        System.out.println("客户端连接PublishServlet成功");
-        AfhinfoDao afhinfoDao = new AfhinfoDao();
-        String stringPublish = req.getParameter("help");
-        JSONObject jsonPublish = JSONObject.fromObject(stringPublish);
-        System.out.println("收到的字符 = " + jsonPublish);
-        Afhinfo afhinfo = (Afhinfo) JSONObject.toBean(jsonPublish, Afhinfo.class);
-        afhinfoDao.addAfhinfo(afhinfo);
+            System.out.println("客户端连接PublishServlet成功");
+            AfhinfoDao afhinfoDao = new AfhinfoDao();
+            String stringPublish = req.getParameter("help");
+            JSONObject jsonPublish = JSONObject.fromObject(stringPublish);
+            System.out.println("收到的字符 = " + jsonPublish);
+            Afhinfo afhinfo = (Afhinfo) JSONObject.toBean(jsonPublish, Afhinfo.class);
+            afhinfoDao.addAfhinfo(afhinfo);
         } catch (SQLException e) {
             e.printStackTrace();
         }

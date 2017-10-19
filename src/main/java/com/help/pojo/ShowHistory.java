@@ -1,6 +1,6 @@
 package com.help.pojo;
 
-public class ShowHistory extends Phinfo {
+public class ShowHistory extends Helpinfo {
     private String unmAFH;
     private String unmPH;
     private String picnumAFH;

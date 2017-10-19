@@ -21,7 +21,7 @@ public class UserDao extends BaseDao{
         String usersex = user.getUsersex();//定义性别
         String password = user.getPassword();//定义密码
         String sql = "SELECT   `userId` FROM `help`.`userinfo` WHERE `mobilephone` like ? ";
-//        lrs = new ArrayList<User>();
+
         try {
             connection = getConnection();
             statement = connection.prepareStatement(sql);
@@ -78,12 +78,35 @@ public class UserDao extends BaseDao{
             statement.setString(1, phoneNum);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
-                user.setUsername(resultSet.getString("username"));
+                user.setUsername(resultSet.getString("username")==null? "" : resultSet.getString("username"));
                 user.setUserId(resultSet.getInt("userId"));
-                user.setPassword(resultSet.getString("password"));
-                user.setMobilephone(resultSet.getString("mobilephone"));
-                user.setUsermail(resultSet.getString("usermail"));
-                user.setUsersex(resultSet.getString("usersex"));
+                user.setPassword(resultSet.getString("password")==null? "" : resultSet.getString("password"));
+                user.setMobilephone(resultSet.getString("mobilephone")==null? "" : resultSet.getString("mobilephone"));
+                user.setUsermail(resultSet.getString("usermail")==null? "" : resultSet.getString("usermail"));
+                user.setUsersex(resultSet.getString("usersex")==null? "" : resultSet.getString("usersex"));
+                user.setPicnum(resultSet.getObject("picnum")==null? "" : resultSet.getString("picnum"));
+            }
+            else {
+                user.setUserId(0000);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        statement.close();
+        connection.close();
+        return user;
+    }
+    public  User SearchUser(int userID) throws SQLException{
+        User user = new User();
+        String sql = "SELECT   * FROM `help`.`userinfo` WHERE `userId` like ? ";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, String.valueOf(userID));
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                user.setUsername(resultSet.getString("username")==null? "" : resultSet.getString("username"));
+                user.setPicnum(resultSet.getObject("picnum")==null? "" : resultSet.getString("picnum"));
             }
             else {
                 user.setUserId(0000);
@@ -137,6 +160,23 @@ public class UserDao extends BaseDao{
             connection = getConnection();
             statement = connection.prepareStatement(sql);
             statement.setString(1,user.getUsername());
+            statement.setString(2, id);
+            num = statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        statement.close();
+        connection.close();
+        return num;
+    }
+    public int changePicnum(User user) throws SQLException {
+        int num = 0;
+        String id = String.valueOf(user.getUserId());
+        String sql = "UPDATE `help`.`userinfo` SET `picnum` = ? WHERE `userId` like ? ";
+        try {
+            connection = getConnection();
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,user.getPicnum());
             statement.setString(2, id);
             num = statement.executeUpdate();
         } catch (SQLException e) {

@@ -30,9 +30,8 @@ public class RequestHallServlet extends HttpServlet {
             String send = jsonArray.toString();
             PrintWriter out = resp.getWriter();
             out.write(send);
-
-            String stringProvideHelp = req.getParameter("help");
-            System.out.println("测试 = "+stringProvideHelp);
+            out.flush();
+            out.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
